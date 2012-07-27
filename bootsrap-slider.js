@@ -27,22 +27,25 @@
 
     this.bind = function(self) {
       this.links.each(function() {
-        console.log(self)
-        console.log(self.pages)
 
         if($(this).data("remote") === true) {
-          // $(this).bind("ajax:beforeSend", function(et, e) {  })
+          $(this).bind("ajax:beforeSend", function(object, xhr) {
+            window.location.href='#' + object.currentTarget.pathname.split('/').pop();
+          })
 
           $(this).bind("ajax:complete", function(object, xhr) {
+            console.log(object)
+
+
             if($(this).data("target") === undefined) {
               self.pages.last().html(xhr.responseText);
-              // FIXME set location hash
               forward(self, true);
             } else {
-              $('.' + $(this).data("target")).html(xhr.responseText);
+              $('.' + $(this).data(opts.target)).html(xhr.responseText);
               forward(self, true);
             }
           })
+
         } else {
           $(this).live("click", function(e) {
             e.preventDefault();
@@ -110,6 +113,7 @@
     link : 'cs_link',
     back : 'cs_back',
     container : 'cs_container',
+    target : 'target',
     page : 'cs_page',
     delay : 100,
     speed : 200
