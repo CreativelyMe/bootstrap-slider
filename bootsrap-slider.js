@@ -34,9 +34,6 @@
           })
 
           $(this).bind("ajax:complete", function(object, xhr) {
-            console.log(object)
-
-
             if($(this).data("target") === undefined) {
               self.pages.last().html(xhr.responseText);
               forward(self, true);
