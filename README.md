@@ -1,8 +1,9 @@
 bootstrap-slider (JQuery content slider plugin)
 ================
 
-javascript:
+Javascript:
 $('#demo').bootsrapSlider();
 
-haml: see demo.html.haml
-
+Ruby on Rails:
+  view: see demo.html.haml
+  controller: see demo_controller.rb
